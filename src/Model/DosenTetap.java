@@ -41,10 +41,28 @@ public class DosenTetap extends Dosen {
     
 
     @Override
-    public String toString() {
-        return "DosenTetap : \n" + super.toString() + "\nSalary=" + salary;
-    }
     
+    public String toString() {
+        String msg = "\nDosen Tetap\n";
+        for (int i = 0; i < mataKuliahAjar.size(); i++) {
+            MatkulAjar current = mataKuliahAjar.get(i);
+            if(current.mataKuliahAjar.getNama() != null) {
+                msg += "\nNama Matkul = " + current.mataKuliahAjar.getNama();
+                msg += "\nKode Matkul = " + current.mataKuliahAjar.getKode();
+                msg += "\nSKS Matkul = " + current.mataKuliahAjar.getSKS();
+            } 
+            
+            for (int j = 0; j < current.getListPresensiStaff().size(); j++) {
+                msg += "\nStatus tanggal "+ current.getListPresensiStaff().get(i).getTanggal() 
+                        + " , jam " + current.getListPresensiStaff().get(i).getJam() 
+                        + " = " + statusChecker(current.getListPresensiStaff().get(j).getStatus());
+            }
+            
+            msg += "\n";
+            
+        }
+        return super.toString() + msg;
+    }
     
     
 }

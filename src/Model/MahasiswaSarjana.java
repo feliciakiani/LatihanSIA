@@ -51,6 +51,8 @@ public class MahasiswaSarjana extends Mahasiswa {
             msg += "\nNilai 2 = " + current.getN2();
             msg += "\nNilai 3 = " + current.getN3();
             
+            msg += "\n";
+            
         }
         
         

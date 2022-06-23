@@ -14,7 +14,7 @@ import java.util.ArrayList;
 abstract class Dosen extends Staff {
     
     private String departemen;
-    private ArrayList<MatkulAjar> listMataKuliahAjar = new ArrayList<>();
+    ArrayList<MatkulAjar> listMataKuliahAjar = new ArrayList<>();
     
     
     public Dosen(String departemen, int NIK, String nama, String alamat, String TTL, String telepon) {
@@ -41,8 +41,14 @@ abstract class Dosen extends Staff {
 
     @Override
     public String toString() {
-        return super.toString() + "\nDepartemen=" + departemen + "\nlistMataKuliahAjar=" + listMataKuliahAjar ;
+        return super.toString() + "\nDepartemen=" + departemen ;
     }
     
+    public String statusChecker(int _status) {
+        if(_status == Interface.HADIR) {
+            return "Hadir";
+        } 
+        return "Alpha";
+    }
     
 }

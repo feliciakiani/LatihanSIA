@@ -98,11 +98,12 @@ public class MainScreen {
                                 NIMinput = i.inputNIK();
                                 kodeMKinput = i.inputKodeMK();
                                 
+                                c.printNilaiAkhir(NIMinput, kodeMKinput);
                                 
                                 break;
                             case 2: //Print Matkul Ambil dan Presensi Mahasiswa
                                 NIMinput = i.inputNIM();
-                                
+                                c.printMatkulAmbilDanPresensiMhs(NIMinput);
                                 
                                 
                                 break;

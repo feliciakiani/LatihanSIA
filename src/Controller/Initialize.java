@@ -546,11 +546,11 @@ public class Initialize {
         
         ArrayList<PresensiStaff> tempPresensiStaff;
         
-        nama = "Yeri";
-        alamat = "Jalan Y";
-        TTL = "Bdg, 28 Jan 1962";
+        nama = "Xander";
+        alamat = "Jalan X";
+        TTL = "Bdg, 5 Nov 1962";
         nik = 003;
-        telp = "08197654654";
+        telp = "0819462345";
         salary = 1000000;
         
         tempPresensiStaff = new ArrayList<>();
@@ -581,7 +581,7 @@ public class Initialize {
         return listDosenHonorer;
     }
     
-    public ArrayList<Karyawan> getKaryawan() {
+    public ArrayList<Karyawan> getArrListKaryawan() {
         return listKaryawan;
     }
 }

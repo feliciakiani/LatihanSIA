@@ -32,11 +32,8 @@ public class PresensiStaff {
         return status;
     }
 
-    public String setStatus(int status) {
-        if(this.status == Interface.HADIR) {
-            return "Hadir";
-        } 
-        return "Alpha";
+    public void setStatus(int status) {
+        this.status = status;
     }
 
     public String getJam() {

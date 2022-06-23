@@ -17,45 +17,55 @@ public class Controller {
     Initialize init = new Initialize();
 
     public void printUserData(String _nama) {
-        String kode = init.getArrListMhsSarjana().get(0).getListMataKuliahSarjana().get(0).getMataKuliahWajib().getKode();
-        System.out.println("kode : " + kode);
-        System.out.println("");
-
-        String namaOrg = init.getArrListMhsSarjana().get(0).getNama();
-        System.out.println("nama org : " + namaOrg);
-        System.out.println("");
-
-        String str = init.getArrListMhsSarjana().get(0).toString();
-        System.out.println("sarjana : " + str);
-        System.out.println("");
-
-        str = init.getArrListMhsMagister().get(0).getListMataKuliahMagister().toString();
-        System.out.println("magister : " + str);
-        System.out.println("");
-
-        str = init.getArrListMhsDoktor().get(0).toString();
-        System.out.println("doktor : " + str);
-        System.out.println("");
-
-        str = init.getArrListDosenHonorer().get(0).toString();
-        System.out.println("dosen honorer : " + str);
-        System.out.println("");
-
-        str = init.getArrListDosenTetap().toString();
-        System.out.println("dosen tetap : " + str);
-        System.out.println("");
-
-        str = init.getKaryawan().get(0).toString();
-        System.out.println("karyawan : " + str);
-        System.out.println("");
+        for (int i = 0; i < init.getArrListMhsSarjana().size(); i++) {
+            if(_nama.equalsIgnoreCase(init.getArrListMhsSarjana().get(i).getNama())){
+                String msg = init.getArrListMhsSarjana().get(i).toString();
+                JOptionPane.showMessageDialog(null, msg);
+                return;
+            }
+        }
         
-        System.out.println("");
-        System.out.println("");
-        System.out.println(init.getArrListMhsSarjana().get(0).getListMataKuliahSarjana().size());
-
-        System.out.println("");
-        System.out.println("");
+        for (int i = 0; i < init.getArrListMhsMagister().size(); i++) {
+            if(_nama.equalsIgnoreCase(init.getArrListMhsMagister().get(i).getNama())){
+                String msg = init.getArrListMhsMagister().get(i).toString();
+                JOptionPane.showMessageDialog(null, msg);
+                return;
+            }
+        }
         
+        for (int i = 0; i < init.getArrListMhsDoktor().size(); i++) {
+            if(_nama.equalsIgnoreCase(init.getArrListMhsDoktor().get(i).getNama())){
+                String msg = init.getArrListMhsDoktor().get(i).toString();
+                JOptionPane.showMessageDialog(null, msg);
+                return;
+            }
+        }
+        
+        for (int i = 0; i < init.getArrListDosenTetap().size(); i++) {
+            if(_nama.equalsIgnoreCase(init.getArrListDosenTetap().get(i).getNama())){
+                String msg = init.getArrListDosenTetap().get(i).toString();
+                JOptionPane.showMessageDialog(null, msg);
+                return;
+            }
+        }
+        
+        for (int i = 0; i < init.getArrListDosenHonorer().size(); i++) {
+            if(_nama.equalsIgnoreCase(init.getArrListDosenHonorer().get(i).getNama())){
+                String msg = init.getArrListDosenHonorer().get(i).toString();
+                JOptionPane.showMessageDialog(null, msg);
+                return;
+            }
+        }
+        
+        for (int i = 0; i < init.getArrListKaryawan().size(); i++) {
+            if(_nama.equalsIgnoreCase(init.getArrListKaryawan().get(i).getNama())){
+                String msg = init.getArrListKaryawan().get(i).toString();
+                JOptionPane.showMessageDialog(null, msg);
+                return;
+            }
+        }
+        
+        JOptionPane.showMessageDialog(null, "Nama yang dimasukkan salah");
         
     }
 
@@ -176,7 +186,19 @@ public class Controller {
     public void printJumlahMhsTidakLulus(String _kodeMK) {
         int total = 0;
         boolean foundKode = false;
-
+        
+        for (int i = 0; i < init.getArrListMhsSarjana().size(); i++) {
+            for (int j = 0; j < init.getArrListMhsSarjana().get(i).getListMataKuliahSarjana().size(); j++) {
+                if (_kodeMK.equals(init.getArrListMhsSarjana().get(j).getListMataKuliahSarjana().get(i).getMataKuliahWajib().getKode()) 
+                            || _kodeMK.equals(init.getArrListMhsSarjana().get(j).getListMataKuliahSarjana().get(i).getMataKuliahPilihan().getKode())){
+                    foundKode = true;
+                    float nilai = (float) init.getArrListMhsSarjana().get(j).getListMataKuliahSarjana().get(i).getN1();
+                    nilai += (float) init.getArrListMhsSarjana().get(j).getListMataKuliahSarjana().get(i).getN2();
+                    nilai += (float) init.getArrListMhsSarjana().get(j).getListMataKuliahSarjana().get(i).getN3();
+                    nilai = nilai / 3;
+                }
+            }
+        }
     }
 
     public void printMatkulAmbilDanPresensiMhs(int _nim) {
@@ -224,9 +246,9 @@ public class Controller {
             if (_nik == init.getArrListDosenTetap().get(i).getNIK()) {
                 msg += init.getArrListDosenTetap().get(i).getNama();
                 foundTetap = true;
-                for (int j = 0; j < init.getArrListDosenTetap().get(i).getListMataKuliahAjar().size(); j++) {
-                    for (int k = 0; k < init.getArrListDosenTetap().get(i).getListMataKuliahAjar().get(j).getListPresensiStaff().size(); k++) {
-                        if (init.getArrListDosenTetap().get(i).getListMataKuliahAjar().get(j).getListPresensiStaff().get(k).getStatus() == Interface.HADIR) {
+                for (int j = 0; j < init.getArrListDosenTetap().get(i).getMataKuliahAjar().size(); j++) {
+                    for (int k = 0; k < init.getArrListDosenTetap().get(i).getMataKuliahAjar().get(j).getListPresensiStaff().size(); k++) {
+                        if (init.getArrListDosenTetap().get(i).getMataKuliahAjar().get(j).getListPresensiStaff().get(k).getStatus() == Interface.HADIR) {
                             total += 2;
                         }
                     }
@@ -241,10 +263,10 @@ public class Controller {
         for (int i = 0; i < init.getArrListDosenHonorer().size(); i++) {
             if (_nik == init.getArrListDosenHonorer().get(i).getNIK()) {
                 msg += init.getArrListDosenHonorer().get(i).getNama();
-                foundTetap = true;
-                for (int j = 0; j < init.getArrListDosenHonorer().get(i).getListMataKuliahAjar().size(); j++) {
-                    for (int k = 0; k < init.getArrListDosenHonorer().get(i).getListMataKuliahAjar().get(j).getListPresensiStaff().size(); k++) {
-                        if (init.getArrListDosenHonorer().get(i).getListMataKuliahAjar().get(j).getListPresensiStaff().get(k).getStatus() == Interface.HADIR) {
+                foundHonorer = true;
+                for (int j = 0; j < init.getArrListDosenHonorer().get(i).getMataKuliahAjar().size(); j++) {
+                    for (int k = 0; k < init.getArrListDosenHonorer().get(i).getMataKuliahAjar().get(j).getListPresensiStaff().size(); k++) {
+                        if (init.getArrListDosenHonorer().get(i).getMataKuliahAjar().get(j).getListPresensiStaff().get(k).getStatus() == Interface.HADIR) {
                             total += 2;
                         }
                     }
@@ -264,59 +286,64 @@ public class Controller {
         boolean foundDosenHonorer = false;
         String msg = "Karyawan " + _nik + " ";
         float gaji = 0;
-        int presensi = 0;
-        for (int i = 0; i < init.getKaryawan().size(); i++) {
-            if (_nik == (init.getKaryawan().get(i).getNIK())) {
+        int unit = 0;
+        for (int i = 0; i < init.getArrListKaryawan().size(); i++) {
+            if (_nik == (init.getArrListKaryawan().get(i).getNIK())) {
                 foundKaryawan = true;
-                for (int j = 0; j < init.getKaryawan().get(i).getListPresensiStaff().size(); j++) {
-                    if (init.getKaryawan().get(i).getListPresensiStaff().get(j).getStatus() == Interface.HADIR) {
-                        presensi++;
+                msg += "; Nama = " + init.getArrListKaryawan().get(i).getNama() + " sebagai karyawan";
+                for (int j = 0; j < init.getArrListKaryawan().get(i).getListPresensiStaff().size(); j++) {
+                    if (init.getArrListKaryawan().get(i).getListPresensiStaff().get(j).getStatus() == Interface.HADIR) {
+                        unit++;
                     }
                 }
-                gaji = presensi / 22 * init.getKaryawan().get(i).getSalary();
+                gaji = (float) unit / 22 * (float)init.getArrListKaryawan().get(i).getSalary();
             }
         }
 
         if (foundKaryawan) {
-
             JOptionPane.showMessageDialog(null, msg + " memiliki gaji sebesar Rp" + gaji);
             return;
         }
 
         for (int i = 0; i < init.getArrListDosenTetap().size(); i++) {
-            if (_nik == (init.getKaryawan().get(i).getNIK())) {
+            if (_nik == (init.getArrListDosenTetap().get(i).getNIK())) {
                 foundDosenTetap = true;
-                for (int j = 0; j < 10; j++) {
+                msg += "; Nama = " + init.getArrListDosenTetap().get(i).getNama() + " sebagai dosen tetap";
+                for (int j = 0; j < init.getArrListDosenTetap().get(i).getMataKuliahAjar().size(); j++) {
                     for (int k = 0; k < init.getArrListDosenTetap().get(i).getMataKuliahAjar().get(j).getListPresensiStaff().size(); k++) {
                         if (init.getArrListDosenTetap().get(i).getMataKuliahAjar().get(j).getListPresensiStaff().get(j).getStatus() == Interface.HADIR) {
-                            presensi++;
+                            unit++;
                         }
                     }
                 }
-                gaji = presensi / 22 * init.getArrListDosenTetap().get(i).getSalary();
+                gaji = init.getArrListDosenTetap().get(i).getSalary() + (unit * 2500);
             }
         }
 
-        if (foundKaryawan) {
+        if (foundDosenTetap) {
             JOptionPane.showMessageDialog(null, msg + " memiliki gaji sebesar Rp" + gaji);
             return;
         }
 
-        for (int i = 0; i < init.getKaryawan().size(); i++) {
-            if (_nik == init.getKaryawan().get(i).getNIK()) {
-                foundKaryawan = true;
-                for (int j = 0; j < init.getKaryawan().get(i).getListPresensiStaff().size(); j++) {
-                    if (init.getKaryawan().get(i).getListPresensiStaff().get(j).getStatus() == Interface.HADIR) {
-                        presensi++;
+        for (int i = 0; i < init.getArrListDosenHonorer().size(); i++) {
+            if (_nik == init.getArrListDosenHonorer().get(i).getNIK()) {
+                foundDosenHonorer = true;
+                msg += "; Nama = " + init.getArrListDosenTetap().get(i).getNama() + " sebagai dosen honorer";
+                for (int j = 0; j < init.getArrListDosenHonorer().get(i).getMataKuliahAjar().size(); j++) {
+                    for (int k = 0; k < init.getArrListDosenHonorer().get(i).getMataKuliahAjar().get(j).getListPresensiStaff().size(); k++) {
+                        if (init.getArrListDosenHonorer().get(i).getMataKuliahAjar().get(j).getListPresensiStaff().get(j).getStatus() == Interface.HADIR) {
+                            unit++;
+                        }
                     }
                 }
-                gaji = presensi / 22 * init.getKaryawan().get(i).getSalary();
+                gaji = unit * init.getArrListDosenHonorer().get(i).getHonorPerSKS();
             }
         }
 
-        if (foundKaryawan) {
+        if (foundDosenHonorer) {
             JOptionPane.showMessageDialog(null, msg + " memiliki gaji sebesar Rp" + gaji);
-            return;
+        } else if (!foundKaryawan && !foundDosenTetap && !foundDosenHonorer){
+            JOptionPane.showMessageDialog(null, "NIK yang dimasukkan salah!");
         }
 
     }
