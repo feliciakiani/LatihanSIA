@@ -184,7 +184,7 @@ public class Controller {
     }
 
     public void printJumlahMhsTidakLulus(String _kodeMK) {
-        int total = 0;
+        int jumlahMhs = 0;
         boolean foundKode = false;
         
         for (int i = 0; i < init.getArrListMhsSarjana().size(); i++) {
@@ -196,9 +196,38 @@ public class Controller {
                     nilai += (float) init.getArrListMhsSarjana().get(j).getListMataKuliahSarjana().get(i).getN2();
                     nilai += (float) init.getArrListMhsSarjana().get(j).getListMataKuliahSarjana().get(i).getN3();
                     nilai = nilai / 3;
+                    
+                    if(nilai < 56){
+                        jumlahMhs++;
+                    }
                 }
             }
         }
+        
+        for (int i = 0; i < init.getArrListMhsMagister().size(); i++) {
+            for (int j = 0; j < init.getArrListMhsMagister().get(i).getListMataKuliahMagister().size(); j++) {
+                if (_kodeMK.equals(init.getArrListMhsMagister().get(j).getListMataKuliahMagister().get(i).getMataKuliahWajib().getKode()) 
+                            || _kodeMK.equals(init.getArrListMhsMagister().get(j).getListMataKuliahMagister().get(i).getMataKuliahPilihan().getKode())){
+                    foundKode = true;
+                    float nilai = (float) init.getArrListMhsMagister().get(j).getListMataKuliahMagister().get(i).getN1();
+                    nilai += (float) init.getArrListMhsMagister().get(j).getListMataKuliahMagister().get(i).getN2();
+                    nilai += (float) init.getArrListMhsMagister().get(j).getListMataKuliahMagister().get(i).getN3();
+                    nilai = nilai / 3;
+                    
+                    if(nilai < 56){
+                        jumlahMhs++;
+                    }
+                }
+            }
+        }
+        
+        if (foundKode) {
+            JOptionPane.showMessageDialog(null, "Jumlah mahasiswa yang tidak lulus = " + jumlahMhs);
+        } else {
+            JOptionPane.showMessageDialog(null, "Kode Mata Kuliah yang dimasukkan salah!");
+        }
+        
+        
     }
 
     public void printMatkulAmbilDanPresensiMhs(int _nim) {
